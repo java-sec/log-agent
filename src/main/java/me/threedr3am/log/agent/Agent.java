@@ -2,14 +2,12 @@ package me.threedr3am.log.agent;
 
 import java.lang.instrument.Instrumentation;
 import java.util.Arrays;
-import java.util.Base64;
-import java.util.HashSet;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
+ * 程序的入口类
+ *
  * @author threedr3am
  */
 public class Agent {
@@ -34,9 +32,9 @@ public class Agent {
             }
             inst.addTransformer(catClassFileTransformer, true);
             Class[] classes = inst.getAllLoadedClasses();
-            List<Class> classList =  Arrays.asList(classes).stream()
-                .filter(c -> catClassFileTransformer.getPattern().matcher(c.getName()).find() && inst.isModifiableClass(c))
-                .collect(Collectors.toList());
+            List<Class> classList = Arrays.stream(classes)
+                    .filter(c -> catClassFileTransformer.getPattern().matcher(c.getName()).find() && inst.isModifiableClass(c))
+                    .collect(Collectors.toList());
             classList.forEach(aClass -> System.out.println("[LOG-AGENT] retransformClasses ------------> " + aClass.getName()));
             classes = classList.toArray(new Class[0]);
             if (classes.length > 0) {

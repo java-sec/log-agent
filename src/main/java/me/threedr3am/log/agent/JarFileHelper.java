@@ -22,12 +22,16 @@ import java.lang.instrument.Instrumentation;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.jar.JarFile;
-import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 从openrasp借鉴的工具类，文件头保留版权了，好评
+ * <p>
+ * <a href="https://github.com/baidu/openrasp/blob/79ccc0fca707b5a19dd91a5b08ee3c7b533f3ec3/agent/java/boot/src/main/java/com/baidu/openrasp/JarFileHelper.java#L31">...</a>
+ */
 public class JarFileHelper {
 
     /**
-     * 添加jar文件到jdk的跟路径下，优先加载
+     * 添加jar文件到jdk的根路径下，优先加载
      *
      * @param inst {@link Instrumentation}
      */

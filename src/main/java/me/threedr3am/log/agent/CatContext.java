@@ -8,15 +8,19 @@ import java.util.Set;
  */
 public class CatContext {
 
-    private static ThreadLocal<Set<String>> cache = new ThreadLocal();
+    private static ThreadLocal<Set<String>> cache = new ThreadLocal<>();
 
     public static boolean check(String method) {
+
         if (cache.get() == null) {
-            cache.set(new HashSet());
+            cache.set(new HashSet<>());
             System.out.println("[LOG-AGENT] call begin +++++++++++++++++++++++++++++++++++++++++++++++++ ");
         }
-        if (cache.get().contains(method))
+
+        if (cache.get().contains(method)) {
             return false;
+        }
+
         cache.get().add(method);
         return true;
     }
